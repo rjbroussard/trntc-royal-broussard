@@ -1,0 +1,75 @@
+<div style="width: 100%; display: flex; flex-direction: row; flex-wrap: wrap">
+  <mat-form-field
+    style="width: 49%; min-width: 300px"
+    appearance="fill"
+    onsubmit="doSearch($event)"
+  >
+    <mat-label>Search</mat-label>
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="searchKeyword"
+      (keydown.enter)="doSearch()"
+    />
+    <button
+      *ngIf="searchKeyword"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="searchKeyword = ''"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <button
+      matSuffix
+      mat-icon-button
+      type="submit"
+      aria-label="Search"
+      (click)="doSearch()"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-paginator
+    style="width: 49%; min-width: 300px"
+    (page)="handlePageEvent($event)"
+    [length]="maxLimit"
+    [pageSize]="9"
+    [showFirstLastButtons]="true"
+    [pageIndex]="pageIndex"
+    aria-label="Select page"
+  >
+    >
+  </mat-paginator>
+</div>
+
+<div class="three-column">
+  <mat-card
+    class="mat-elevation-z8"
+    *ngFor="let image of pagedImages"
+    style="height: -webkit-fill-available; margin: 5px"
+  >
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ image.title }}</mat-card-title>
+    </mat-card-header>
+    <img
+      mat-card-image
+      src="{{ image.images.original.url }}"
+      alt="{{ image?.title }}"
+    />
+  </mat-card>
+</div>
+
+<mat-paginator
+  *ngIf="pagedImages.length > 0"
+  style="width: 49%; min-width: 300px"
+  (page)="handlePageEvent($event)"
+  [length]="maxLimit"
+  [pageSize]="9"
+  [showFirstLastButtons]="true"
+  [pageIndex]="pageIndex"
+  aria-label="Select page"
+>
+  >
+</mat-paginator>

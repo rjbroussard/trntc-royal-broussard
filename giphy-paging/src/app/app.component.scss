@@ -1,0 +1,10 @@
+$one-thrid-screen: 29%;
+$breakpoint-tablet: 768px;
+@media (min-width: $breakpoint-tablet) {
+  .three-column {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: stretch;
+    align-items: center;
+  }
+}
