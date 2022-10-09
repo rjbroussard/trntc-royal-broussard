@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { TestDataService } from "./test-data.service";
 import { UrlService } from "./url.service";
 
 @Injectable({
@@ -11,8 +10,7 @@ export class appService {
 
   constructor(
     private httpClient: HttpClient,
-    private urlService: UrlService,
-    private testData: TestDataService) { }
+    private urlService: UrlService) { }
 
   getImages(keyword: string, pageOffest: number): Observable<GiffyResponce> {
     const params = new URLSearchParams()
