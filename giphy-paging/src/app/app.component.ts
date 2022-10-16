@@ -16,7 +16,7 @@ export class AppComponent {
   searchKeyword = ''
   pageRequestIndex = 0;
   pageIndex = 0;
-  public maxLimit = 0;
+  maxLimit = 0;
 
   maxGiffyResponceLimit = 5000;
 
@@ -48,6 +48,4 @@ export class AppComponent {
     });
 
   }
-
-
 }
