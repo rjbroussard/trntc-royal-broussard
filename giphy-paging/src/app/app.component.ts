@@ -22,51 +22,28 @@ export class AppComponent {
 
 
   constructor(private appServ: appService,
-    private _mat_snackbar: MatSnackBar) {
+    private matSnackbar: MatSnackBar) {
   }
 
-
-
-  handlePageEvent(event: PageEvent) {
-    this.pageIndex = event.pageIndex;
-    this.pageRequestIndex = 9 * event.pageIndex;
-
+  getImages(event: PageEvent | undefined) {
+    this.pageRequestIndex = 0;
+    this.pageIndex = 0
+    if (event) {
+      this.pageIndex = event.pageIndex;
+      this.pageRequestIndex = 9 * event.pageIndex;
+    }
     this.appServ.getImages(this.searchKeyword, this.pageRequestIndex).pipe(take(1)).subscribe({
       next: (jsonData) => {
-        if (jsonData && jsonData.meta  && jsonData.meta.status !== 200) {
-          this._mat_snackbar.open(jsonData.meta.msg, 'dismiss')
+        const okayResponseCode = 200
+        if (jsonData && jsonData.meta && jsonData.meta.status !== okayResponseCode) {
+          this.matSnackbar.open(jsonData.meta.msg, 'dismiss')
         }
         const giffyResp: GiffyResponce = jsonData;
         this.pagedImages = giffyResp.data;
         this.maxLimit = giffyResp.pagination.total_count > this.maxGiffyResponceLimit ? this.maxGiffyResponceLimit : giffyResp.pagination.total_count;
       },
       error: (errorCode) => {
-        this._mat_snackbar.open(errorCode, 'dismiss')
-      },
-      complete: () => {
-
-      }
-    });
-
-  }
-
-  doSearch() {
-    this.pageRequestIndex = 0;
-    this.pageIndex = 0
-    this.appServ.getImages(this.searchKeyword, this.pageRequestIndex).pipe(take(1)).subscribe({
-      next: (jsonData) => {
-        if (jsonData && jsonData.meta  && jsonData.meta.status !== 200) {
-          this._mat_snackbar.open(jsonData.meta.msg, 'dismiss')
-        }
-        const giffyResp: GiffyResponce = jsonData;
-        this.pagedImages = giffyResp.data
-        this.maxLimit = giffyResp.pagination.total_count > this.maxGiffyResponceLimit ? this.maxGiffyResponceLimit : giffyResp.pagination.total_count;
-      },
-      error: (errorCode) => {
-        this._mat_snackbar.open(JSON.stringify(errorCode['statusText']), 'dismiss')
-      },
-      complete: () => {
-
+        this.matSnackbar.open(errorCode, 'dismiss')
       }
     });
 

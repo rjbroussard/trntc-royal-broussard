@@ -18,7 +18,7 @@ export class appService {
     params.append('api_key', 'wnr7LMgNBTBejk720sp9YRqyegPlN1dQ')
     params.append('limit', '9')
     params.append('offset', pageOffest.toString())
-    return this.httpClient.request<GiffyResponce>('GET', this.urlService.giffySearchUrl + '?' + params.toString())
+    return this.httpClient.request<GiffyResponce>('GET', this.urlService.giffySearchUrl + '?' + params.toString());
   }
 }
 
@@ -60,9 +60,7 @@ export interface GiffyData {
   import_datetime: string;
   trending_datetime: string;
   images: Images;
-  user: User;
   analytics_response_payload: string;
-  analytics: Analytics;
 }
 
 
@@ -77,20 +75,6 @@ export interface Original {
   webp: string;
   frames: string;
   hash: string;
-}
-
-export interface Downsized {
-  height: string;
-  width: string;
-  size: string;
-  url: string;
-}
-
-export interface DownsizedLarge {
-  height: string;
-  width: string;
-  size: string;
-  url: string;
 }
 
 
@@ -119,37 +103,5 @@ export interface Images {
   preview_gif: any;
   preview_webp: any;
 }
-
-export interface User {
-  avatar_url: string;
-  banner_image: string;
-  banner_url: string;
-  profile_url: string;
-  username: string;
-  display_name: string;
-  description: string;
-  instagram_url: string;
-  website_url: string;
-  is_verified: boolean;
-}
-
-export interface Onload {
-  url: string;
-}
-
-export interface Onclick {
-  url: string;
-}
-
-export interface Onsent {
-  url: string;
-}
-
-export interface Analytics {
-  onload: Onload;
-  onclick: Onclick;
-  onsent: Onsent;
-}
-
 
 

@@ -7,4 +7,30 @@ $breakpoint-tablet: 768px;
     justify-items: stretch;
     align-items: center;
   }
+  .top-bar {
+    width: 50%;
+  }
+  .bottom-bar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.main-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .top-bar {
+    width: 100%;
+  }
+  .bottom-bar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
 }
